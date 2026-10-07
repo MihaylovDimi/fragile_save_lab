@@ -6,7 +6,7 @@ When I tested `SaveManager` in Phase 2, I had to use `@patch("persistence.sqlite
 
 ## 2. Why is a unit test with mocks more efficient for this scenario than a full integration test?
 
-A unit test with a mock is faster and easier to control, because it does not need a real database, tables, or cleaning up data after each test. My three tests ran in a fraction of a second because they only worked with mock objects. I could also easily test what happens when the database is down by using `side_effect`, instead of actually stopping a database. This makes the unit test well suited to checking the behaviour of `SaveManager` in isolation. [However, integration tests are still needed at a higher level of the testing pyramid, because a mock only checks that my code calls the database correctly, not that the SQL itself works against a real table.]
+A unit test with a mock is faster and easier to control, because it does not need a real database, tables, or cleaning up data after each test. My three tests ran in a fraction of a second because they only worked with mock objects. I could also easily test what happens when the database is down by using `side_effect`, instead of actually stopping a database. This makes the unit test well suited to checking the behaviour of `SaveManager` in isolation. However, integration tests are still needed at a higher level of the testing pyramid, because a mock only checks that my code calls the database correctly, not that the SQL itself works against a real table.
 
 ## 3. How does removing the design smell of Fragility help the team respond to changing requirements?
 
