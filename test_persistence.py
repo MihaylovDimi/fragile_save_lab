@@ -17,3 +17,11 @@ def test_save_user_writes_user_to_database(mock_connect):
     )
     mock_connection.commit.assert_called_once()
     assert result == "User saved"
+
+@patch("persistence.sqlite3.connect")
+def test_save_user_returns_service_unavailable_when_database_is_down(mock_connect):
+    mock_connect.return_value.execute.side_effect = ConnectionError("Database unreachable")
+
+    result = SaveManager().save_user("alice")
+
+    assert result == "Service Unavailable"    

@@ -9,8 +9,11 @@ class SaveManager:
     """Saves users directly to a hard-coded SQL database."""
 
     def save_user(self, username):
-        connection = sqlite3.connect(DATABASE_PATH)
-        connection.execute("INSERT INTO users (name) VALUES (?)", (username,))
-        connection.commit()
-        connection.close()
+        try:
+            connection = sqlite3.connect(DATABASE_PATH)
+            connection.execute("INSERT INTO users (name) VALUES (?)", (username,))
+            connection.commit()
+            connection.close()
+        except ConnectionError:
+            return "Service Unavailable"
         return "User saved"
